@@ -12,7 +12,7 @@
  * @Author: Xk_w
  * @Date: 2023-11-16 15:49:20
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-12-19 18:01:12
+ * @LastEditTime: 2023-12-22 14:20:14
  * @License: GPL 3.0
  */
 #pragma once
@@ -23,10 +23,15 @@
 #include "Arduino_DriveBus.h"
 
 #include "./hardware/Arduino_HWIIC.h"
+#include "./hardware/Arduino_HWIIS.h"
 
 #include "Arduino_IIC.h"
+#include "Arduino_IIS.h"
 
 #include "./power_chip/Arduino_ETA4662.h"
 #include "./power_chip/Arduino_SY6970.h"
 
 #include "./touch_chip/Arduino_CST816x.h"
+
+#include "./iis_chip/Arduino_MEMS.h"
+#include "./iis_chip/Arduino_Amplifier.h"

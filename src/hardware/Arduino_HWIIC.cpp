@@ -4,7 +4,7 @@
  * @Author: Xk_w
  * @Date: 2023-11-16 15:46:16
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-11-22 14:16:22
+ * @LastEditTime: 2023-12-21 15:01:20
  * @License: GPL 3.0
  */
 #include "Arduino_HWIIC.h"
@@ -16,7 +16,7 @@ Arduino_HWIIC::Arduino_HWIIC(int8_t sda, int8_t scl, TwoWire *wire)
 
 bool Arduino_HWIIC::begin(int32_t speed)
 {
-    _speed = (speed == DRIVEBUS_DEFAULT_VALUE) ? IIC_Default_Speed : speed;
+    _speed = (speed == DRIVEBUS_DEFAULT_VALUE) ? IIC_DEFAULT_SPEED : speed;
 
     if (_wire->begin(_sda, _scl, _speed) == false)
     {

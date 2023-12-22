@@ -3,7 +3,7 @@
  *      这是一个使用硬件IIC的IIC底层驱动文件
  *
  * @Description(EN):
- * This is a bottom-layer IIC driver file using hardware IIC.
+ *      This is a bottom-layer IIC driver file using hardware IIC.
  *
  * @version: V1.0.0
  * @Author: Xk_w
@@ -17,7 +17,7 @@
 #include <Wire.h>
 #include "../Arduino_DriveBus.h"
 
-#define IIC_Default_Speed 100000UL
+#define IIC_DEFAULT_SPEED 100000UL
 
 class Arduino_HWIIC : public Arduino_IIC_DriveBus
 {

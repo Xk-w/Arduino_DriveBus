@@ -1,13 +1,12 @@
 /*
- * @Description: None
+ * @Description: Arduino_ETA4662.cpp
  * @version: V1.0.0
  * @Author: Xk_w
  * @Date: 2023-11-16 15:42:22
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-11-27 17:47:17
+ * @LastEditTime: 2023-12-22 14:18:58
  * @License: GPL 3.0
  */
-
 #include "Arduino_ETA4662.h"
 
 Arduino_ETA4662::Arduino_ETA4662(
@@ -413,6 +412,8 @@ bool Arduino_ETA4662::IIC_Write_Device_Value(uint32_t device, uint32_t value)
     default:
         break;
     }
+
+    return false;
 }
 
 String Arduino_ETA4662::IIC_Read_Device_State(uint32_t information)

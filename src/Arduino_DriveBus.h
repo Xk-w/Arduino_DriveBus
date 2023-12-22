@@ -10,7 +10,7 @@
  * @Author: Xk_w
  * @Date: 2023-11-16 15:53:46
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-11-25 17:54:03
+ * @LastEditTime: 2023-12-22 14:20:58
  * @License: GPL 3.0
  */
 #pragma once
@@ -49,4 +49,30 @@ public:
 
 protected:
     int32_t _speed;
+};
+
+class Arduino_IIS_DriveBus
+{
+public:
+    enum Device_Data_Mode
+    {
+        DATA_OUT,
+        DATA_IN,
+    };
+
+    Arduino_IIS_DriveBus();
+
+    virtual bool begin(int8_t device_state = DRIVEBUS_DEFAULT_VALUE,
+                       int32_t sample_rate = 44100UL, int32_t bits_per_sample = 16) = 0;
+
+    virtual size_t Read(char *data, size_t length) = 0;
+    virtual size_t Write(char *data, size_t length) = 0;
+
+    bool IIS_Read(char *data, size_t length);
+    bool IIS_Write(char *data, size_t length);
+
+protected:
+    int8_t _device_state;
+
+    int32_t _sample_rate, _bits_per_sample;
 };

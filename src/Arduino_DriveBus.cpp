@@ -4,7 +4,7 @@
  * @Author: Xk_w
  * @Date: 2023-11-16 15:53:46
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-11-25 17:55:59
+ * @LastEditTime: 2023-12-22 14:20:40
  * @License: GPL 3.0
  */
 #include "Arduino_DriveBus.h"
@@ -113,5 +113,31 @@ bool Arduino_IIC_DriveBus::IIC_ReadC8D8(uint8_t device_address, uint8_t c, uint8
     }
     *d = Read();
 
+    return true;
+}
+
+Arduino_IIS_DriveBus::Arduino_IIS_DriveBus() {}
+
+bool Arduino_IIS_DriveBus::IIS_Read(char *data, size_t length)
+{
+    size_t temp_buf = Read(data, length);
+
+    if (temp_buf != length)
+    {
+        log_e("->Read(data, length) fail");
+        return false;
+    }
+    return true;
+}
+
+bool Arduino_IIS_DriveBus::IIS_Write(char *data, size_t length)
+{
+    size_t temp_buf = Write(data, length);
+
+    if (temp_buf != length)
+    {
+        log_e("->Write(data, length) fail");
+        return false;
+    }
     return true;
 }

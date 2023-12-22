@@ -7,7 +7,6 @@
  * @LastEditTime: 2023-12-19 18:00:15
  * @License: GPL 3.0
  */
-
 #include "Arduino_CST816x.h"
 
 Arduino_CST816x::Arduino_CST816x(
