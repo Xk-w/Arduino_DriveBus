@@ -5,11 +5,11 @@
  * @Description(EN):
  *      This is a bottom-layer IIC driver file using hardware IIC.
  *
- * @version: V1.0.0
+ * @version: V1.0.1
  * @Author: Xk_w
  * @Date: 2023-11-16 15:45:17
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-11-22 14:17:40
+ * @LastEditTime: 2023-12-27 14:06:54
  * @License: GPL 3.0
  */
 #pragma once
@@ -29,6 +29,7 @@ public:
     void BeginTransmission(uint8_t device_address) override;
     bool EndTransmission(void) override;
     bool Write(uint8_t d) override;
+    bool Write(const uint8_t *data, size_t length) override;
     uint8_t Read(void) override;
     bool RequestFrom(uint8_t device_address, size_t length) override;
 

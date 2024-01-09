@@ -4,7 +4,7 @@
  * @Author: Xk_w
  * @Date: 2023-11-16 15:53:46
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-12-22 14:20:40
+ * @LastEditTime: 2024-01-08 13:47:41
  * @License: GPL 3.0
  */
 #include "Arduino_DriveBus.h"
@@ -77,6 +77,43 @@ bool Arduino_IIC_DriveBus::BufferOperation(uint8_t device_address, const uint8_t
     return true;
 }
 
+bool Arduino_IIC_DriveBus::IIC_Device_7Bit_Scan(std::vector<unsigned char> *device_address)
+{
+    std::vector<unsigned char> device_address_temp; // 地址存储器
+
+    for (uint8_t i = 1; i < 128; i++)
+    {
+        BeginTransmission(i);
+        if (EndTransmission() == true)
+        {
+            device_address_temp.push_back(i);
+        }
+    }
+
+    if (device_address_temp.empty() == false)
+    {
+        device_address->assign(device_address_temp.begin(), device_address_temp.end());
+        return true;
+    }
+    return false;
+}
+
+bool Arduino_IIC_DriveBus::IIC_Write_Data(uint8_t device_address, const uint8_t *data, size_t length)
+{
+    BeginTransmission(device_address);
+    if (Write(data, length) == false)
+    {
+        log_e("->Write(data, length) fail");
+        return false;
+    }
+    if (EndTransmission() == false)
+    {
+        log_e("->EndTransmission() fail");
+        return false;
+    }
+    return true;
+}
+
 bool Arduino_IIC_DriveBus::IIC_WriteC8D8(uint8_t device_address, uint8_t c, uint8_t d)
 {
     BeginTransmission(device_address);
@@ -90,6 +127,29 @@ bool Arduino_IIC_DriveBus::IIC_WriteC8D8(uint8_t device_address, uint8_t c, uint
         log_e("->EndTransmission() fail");
         return false;
     }
+    return true;
+}
+
+bool Arduino_IIC_DriveBus::IIC_ReadC8_Data(uint8_t device_address, uint8_t c, uint8_t *d, size_t length)
+{
+    BeginTransmission(device_address);
+    if (Write(c) == false)
+    {
+        log_e("->Write(c) fail");
+        return false;
+    }
+    if (EndTransmission() == false)
+    {
+        log_e("->EndTransmission() fail");
+        return false;
+    }
+    if (RequestFrom(device_address, length) == false)
+    {
+        log_e("->RequestFrom(device_address, length) fail");
+        return false;
+    }
+    *d = Read();
+
     return true;
 }
 

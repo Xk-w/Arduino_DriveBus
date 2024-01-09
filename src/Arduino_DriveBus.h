@@ -10,12 +10,14 @@
  * @Author: Xk_w
  * @Date: 2023-11-16 15:53:46
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-12-22 14:20:58
+ * @LastEditTime: 2024-01-08 11:08:46
  * @License: GPL 3.0
  */
 #pragma once
 
 #include <Arduino.h>
+#include <iostream>
+#include <vector>
 
 #define DRIVEBUS_DEFAULT_VALUE -1
 
@@ -38,13 +40,18 @@ public:
     virtual void BeginTransmission(uint8_t device_address) = 0;
     virtual bool EndTransmission(void) = 0;
     virtual bool Write(uint8_t d) = 0;
+    virtual bool Write(const uint8_t *data, size_t length) = 0;
     virtual uint8_t Read(void) = 0;
     virtual bool RequestFrom(uint8_t device_address, size_t length) = 0;
     virtual bool WriteC8D8(uint8_t c, uint8_t d);
 
     bool BufferOperation(uint8_t device_address, const uint8_t *operations, size_t length);
 
+    bool IIC_Device_7Bit_Scan(std::vector<unsigned char> *device_address);
+
+    bool IIC_Write_Data(uint8_t device_address, const uint8_t *data, size_t length);
     bool IIC_WriteC8D8(uint8_t device_address, uint8_t c, uint8_t d);
+    bool IIC_ReadC8_Data(uint8_t device_address, uint8_t c, uint8_t *d, size_t length);
     bool IIC_ReadC8D8(uint8_t device_address, uint8_t c, uint8_t *d);
 
 protected:

@@ -1,10 +1,10 @@
 /*
  * @Description: Arduino_HWIIC.cpp
- * @version: V1.0.0
+ * @version: V1.0.1
  * @Author: Xk_w
  * @Date: 2023-11-16 15:46:16
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-12-21 15:01:20
+ * @LastEditTime: 2023-12-27 14:08:04
  * @License: GPL 3.0
  */
 #include "Arduino_HWIIC.h"
@@ -38,6 +38,11 @@ bool Arduino_HWIIC::EndTransmission(void)
 bool Arduino_HWIIC::Write(uint8_t d)
 {
     return _wire->write(d);
+}
+
+bool Arduino_HWIIC::Write(const uint8_t *data, size_t length)
+{
+    return _wire->write(data, length);
 }
 
 uint8_t Arduino_HWIIC::Read(void)
