@@ -52,8 +52,8 @@ void setup()
     Serial.println("SY6970 initialization successfully");
 
     // 开启ADC测量功能
-    while (SY6970->IIC_Write_Device_State(SY6970->Device::POWER_DEVICE_ADC_MEASURE,
-                                          SY6970->Device_State::POWER_DEVICE_ON) == false)
+    while (SY6970->IIC_Write_Device_State(SY6970->Arduino_IIC_Power::Device::POWER_DEVICE_ADC_MEASURE,
+                                          SY6970->Arduino_IIC_Power::Device_State::POWER_DEVICE_ON) == false)
     {
         Serial.println("SY6970 ADC Measure ON fail");
         delay(2000);
