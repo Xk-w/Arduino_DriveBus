@@ -26,7 +26,6 @@
  * @LastEditTime: 2023-11-28 10:34:14
  * @License: GPL 3.0
  */
-#include "Arduino_GFX_Library.h"
 #include "Arduino_DriveBus_Library.h"
 #include "pin_config.h"
 
