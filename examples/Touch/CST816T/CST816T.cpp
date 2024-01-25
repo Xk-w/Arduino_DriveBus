@@ -54,9 +54,9 @@ void setup()
     }
     Serial.println("CST816T initialization successfully");
 
-    // 中断模式为检测到手势时，发出低脉冲
+    // 中断模式为检测到触摸时，发出低脉冲
     //  CST816T->IIC_Write_Device_State(CST816T->Arduino_IIC_Touch::Device::TOUCH_DEVICE_INTERRUPT_MODE,
-    //                                  CST816T->Arduino_IIC_Touch::Device_Mode::TOUCH_INTERRUPT_MOTION);
+    //                                  CST816T->Arduino_IIC_Touch::Device_Mode::TOUCH_DEVICE_INTERRUPT_PERIODIC);
 
     // 目前休眠功能只能进入不能退出 所有不建议开启休眠
     // CST816T->IIC_Write_Device_State(CST816T->Arduino_IIC_Touch::Device::TOUCH_DEVICE_SLEEP_MODE,
