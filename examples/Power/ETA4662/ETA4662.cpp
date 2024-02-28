@@ -22,11 +22,10 @@
  * @Author: Xk_w
  * @Date: 2023-11-27 10:08:51
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-11-27 17:54:02
+ * @LastEditTime: 2024-02-28 14:19:22
  * @License: GPL 3.0
  */
 #include "Arduino_DriveBus_Library.h"
-#include "pin_config.h"
 
 std::shared_ptr<Arduino_IIC_DriveBus> IIC_Bus =
     std::make_shared<Arduino_HWIIC>(IIC_SDA, IIC_SCL, &Wire);
@@ -68,7 +67,6 @@ void setup()
     ETA4662->IIC_Write_Device_Value(ETA4662->Arduino_IIC_Power::Device_Value::POWER_DEVICE_TERMINATION_PRECHARGE_CHARGING_CURRENT_LIMIT, 5);
     // BAT到SYS的放电电流限制设置为2200mA
     ETA4662->IIC_Write_Device_Value(ETA4662->Arduino_IIC_Power::Device_Value::POWER_DEVICE_BAT_TO_SYS_DISCHARGE_CURRENT_LIMIT, 2200);
-
 }
 void loop()
 {

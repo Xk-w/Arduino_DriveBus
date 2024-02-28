@@ -9,11 +9,10 @@
  * @Author: Xk_w
  * @Date: 2023-12-20 16:24:06
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-12-22 14:22:25
+ * @LastEditTime: 2024-02-28 14:19:22
  * @License: GPL 3.0
  */
 #include "Arduino_DriveBus_Library.h"
-#include "pin_config.h"
 
 #define IIS_SAMPLE_RATE 44100 // 采样速率
 #define IIS_DATA_BIT 16       // 数据位数

@@ -8,17 +8,14 @@
  * the Arduino_DriveBus library, which contains all the necessary libraries to be referenced.
  * Just call this header file when using it.
  *
- * @version: V1.0.0
+ * @version: V1.1.5
  * @Author: Xk_w
  * @Date: 2023-11-16 15:49:20
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-12-22 14:20:14
+ * @LastEditTime: 2024-02-28 14:43:14
  * @License: GPL 3.0
  */
 #pragma once
-
-#include <iostream>
-#include <memory>
 
 #include "Arduino_DriveBus.h"
 
@@ -32,6 +29,10 @@
 #include "./power_chip/Arduino_SY6970.h"
 
 #include "./touch_chip/Arduino_CST816x.h"
+#include "./touch_chip/Arduino_CST2xxSE.h"
+#include "./touch_chip/Arduino_FT3x68.h"
 
 #include "./iis_chip/Arduino_MEMS.h"
 #include "./iis_chip/Arduino_Amplifier.h"
+
+#include "./imu_chip/Arduino_LSM6DSL.h"

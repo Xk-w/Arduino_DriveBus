@@ -4,10 +4,9 @@
  * @Author: Xk_w
  * @Date: 2023-11-16 16:58:05
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-12-22 14:21:34
+ * @LastEditTime: 2024-02-28 14:53:14
  * @License: GPL 3.0
  */
-#include <iostream>
 #include "Arduino_IIS.h"
 
 Arduino_IIS::Arduino_IIS(std::shared_ptr<Arduino_IIS_DriveBus> bus, int8_t sd)
@@ -36,12 +35,12 @@ bool Arduino_IIS::IIS_Device_Switch(bool device_switch)
 {
     if (_sd != DRIVEBUS_DEFAULT_VALUE)
     {
-        if (device_switch == Device_Switch::Channel_OFF)
+        if (device_switch == Device_Switch::CHANNEL_OFF)
         {
             digitalWrite(_sd, LOW); // 关闭
             return true;
         }
-        if (device_switch == Device_Switch::Channel_ON)
+        if (device_switch == Device_Switch::CHANNEL_ON)
         {
             digitalWrite(_sd, HIGH); // 开启
             return true;

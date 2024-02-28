@@ -1,10 +1,10 @@
 /*
  * @Description: Arduino_CST816x.cpp
- * @version: V1.0.0
+ * @version: V1.0.1
  * @Author: Xk_w
  * @Date: 2023-11-25 09:14:02
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-12-19 18:00:15
+ * @LastEditTime: 2024-02-28 15:00:37
  * @License: GPL 3.0
  */
 #include "Arduino_CST816x.h"
@@ -68,23 +68,20 @@ bool Arduino_CST816x::IIC_Write_Device_State(uint32_t device, uint8_t state)
         {
         case Arduino_IIC_Touch::Device_State::TOUCH_DEVICE_ON:
             temp_buf = 0B00000011;
-            if (_bus->IIC_WriteC8D8(_device_address, CST816x_RD_DEVICE_SLEEPMODE, temp_buf) == true)
+            if (_bus->IIC_WriteC8D8(_device_address, CST816x_WR_DEVICE_SLEEPMODE, temp_buf) == true)
             {
                 return true;
             }
-            return false;
             break;
         case Arduino_IIC_Touch::Device_State::TOUCH_DEVICE_OFF: // 目前休眠功能只能进入不能退出
             temp_buf = 0B00000000;
-            if (_bus->IIC_WriteC8D8(_device_address, CST816x_RD_DEVICE_SLEEPMODE, temp_buf) == true)
+            if (_bus->IIC_WriteC8D8(_device_address, CST816x_WR_DEVICE_SLEEPMODE, temp_buf) == true)
             {
                 return true;
             }
-            return false;
             break;
 
         default:
-            return false;
             break;
         }
         break;
@@ -93,53 +90,46 @@ bool Arduino_CST816x::IIC_Write_Device_State(uint32_t device, uint8_t state)
         {
         case Arduino_IIC_Touch::Device_Mode::TOUCH_DEVICE_INTERRUPT_TEST:
             temp_buf = 0B10000000;
-            if (_bus->IIC_WriteC8D8(_device_address, CST816x_RD_DEVICE_INTERRUPT_MODE, temp_buf) == true)
+            if (_bus->IIC_WriteC8D8(_device_address, CST816x_WR_DEVICE_INTERRUPT_MODE, temp_buf) == true)
             {
                 return true;
             }
-            return false;
             break;
         case Arduino_IIC_Touch::Device_Mode::TOUCH_DEVICE_INTERRUPT_PERIODIC:
             temp_buf = 0B01000000;
-            if (_bus->IIC_WriteC8D8(_device_address, CST816x_RD_DEVICE_INTERRUPT_MODE, temp_buf) == true)
+            if (_bus->IIC_WriteC8D8(_device_address, CST816x_WR_DEVICE_INTERRUPT_MODE, temp_buf) == true)
             {
                 return true;
             }
-            return false;
             break;
         case Arduino_IIC_Touch::Device_Mode::TOUCH_DEVICE_INTERRUPT_CHANGE:
             temp_buf = 0B00100000;
-            if (_bus->IIC_WriteC8D8(_device_address, CST816x_RD_DEVICE_INTERRUPT_MODE, temp_buf) == true)
+            if (_bus->IIC_WriteC8D8(_device_address, CST816x_WR_DEVICE_INTERRUPT_MODE, temp_buf) == true)
             {
                 return true;
             }
-            return false;
             break;
         case Arduino_IIC_Touch::Device_Mode::TOUCH_DEVICE_INTERRUPT_MOTION:
             temp_buf = 0B00010000;
-            if (_bus->IIC_WriteC8D8(_device_address, CST816x_RD_DEVICE_INTERRUPT_MODE, temp_buf) == true)
+            if (_bus->IIC_WriteC8D8(_device_address, CST816x_WR_DEVICE_INTERRUPT_MODE, temp_buf) == true)
             {
                 return true;
             }
-            return false;
             break;
         case Arduino_IIC_Touch::Device_Mode::TOUCH_DEVICE_INTERRUPT_ONCEWLP:
             temp_buf = 0B00000001;
-            if (_bus->IIC_WriteC8D8(_device_address, CST816x_RD_DEVICE_INTERRUPT_MODE, temp_buf) == true)
+            if (_bus->IIC_WriteC8D8(_device_address, CST816x_WR_DEVICE_INTERRUPT_MODE, temp_buf) == true)
             {
                 return true;
             }
-            return false;
             break;
 
         default:
-            return false;
             break;
         }
         break;
 
     default:
-        return false;
         break;
     }
     return false;
@@ -197,7 +187,7 @@ String Arduino_CST816x::IIC_Read_Device_State(uint32_t information)
     return "->Error reading IIC_Read_Information";
 }
 
-int32_t Arduino_CST816x::IIC_Read_Device_Value(uint32_t information)
+double Arduino_CST816x::IIC_Read_Device_Value(uint32_t information)
 {
     uint8_t temp_buf = 0;
     uint8_t temp_buf_2 = 0;
@@ -222,10 +212,7 @@ int32_t Arduino_CST816x::IIC_Read_Device_Value(uint32_t information)
             default:
                 break;
             }
-
-            return -1;
         }
-        return -1;
         break;
     case Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_X:
         if (_bus->IIC_ReadC8D8(_device_address, CST816x_RD_DEVICE_XPOSH, &temp_buf) == true)
@@ -234,12 +221,9 @@ int32_t Arduino_CST816x::IIC_Read_Device_Value(uint32_t information)
 
             if (_bus->IIC_ReadC8D8(_device_address, CST816x_RD_DEVICE_XPOSL, &temp_buf_2) == true)
             {
-                return int32_t(((int32_t)temp_buf << 8) | (int32_t)temp_buf_2);
+                return int32_t(((int16_t)temp_buf << 8) | (int16_t)temp_buf_2);
             }
-
-            return -1;
         }
-        return -1;
         break;
     case Arduino_IIC_Touch::Value_Information::TOUCH_COORDINATE_Y:
         if (_bus->IIC_ReadC8D8(_device_address, CST816x_RD_DEVICE_YPOSH, &temp_buf) == true)
@@ -248,16 +232,12 @@ int32_t Arduino_CST816x::IIC_Read_Device_Value(uint32_t information)
 
             if (_bus->IIC_ReadC8D8(_device_address, CST816x_RD_DEVICE_YPOSL, &temp_buf_2) == true)
             {
-                return int32_t(((int32_t)temp_buf << 8) | (int32_t)temp_buf_2);
+                return int32_t(((int16_t)temp_buf << 8) | (int16_t)temp_buf_2);
             }
-
-            return -1;
         }
-        return -1;
         break;
 
     default:
-        return -1;
         break;
     }
     return -1;

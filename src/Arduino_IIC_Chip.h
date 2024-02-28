@@ -5,11 +5,11 @@
  * @Description(EN):
  *      A sub-branch of Arduino_IIC, used for storing IIC-related Power chip data
  *
- * @version: V1.0.0
+ * @version: V1.1.5
  * @Author: Xk_w
  * @Date: 2023-11-16 16:58:05
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-12-08 13:01:25
+ * @LastEditTime: 2024-02-28 14:45:20
  * @License: GPL 3.0
  */
 #pragma once
@@ -119,15 +119,24 @@ public:
         TOUCH_DEVICE_INTERRUPT_CHANGE,   // 检测到触摸状态变化时，发出低脉冲
         TOUCH_DEVICE_INTERRUPT_MOTION,   //  检测到手势时，发出低脉冲
         TOUCH_DEVICE_INTERRUPT_ONCEWLP,  //  长按手势只发出一个低脉冲信号
+
+        // 触摸功耗模式
+        TOUCH_POWER_ACTIVE,
+        TOUCH_POWER_MONITOR,
+        TOUCH_POWER_STANDBY,
+        TOUCH_POWER_HIBERNATE,
     };
     enum Device
     {
         TOUCH_DEVICE_INTERRUPT_MODE, // 触摸中断模式
         TOUCH_DEVICE_SLEEP_MODE,     // 休眠模式
+
+        TOUCH_POWER_MODE,             // 触摸芯片工作功耗模式
+        TOUCH_PROXIMITY_SENSING_MODE, // 进距离感应模式
+        TOUCH_GESTUREID_MODE,         // 特殊手势模式
     };
     enum Device_Value
     {
-
     };
     enum Status_Information
     {
@@ -136,7 +145,101 @@ public:
     enum Value_Information
     {
         TOUCH_FINGER_NUMBER, // 触摸手指个数
-        TOUCH_COORDINATE_X,  // 触摸坐标X
-        TOUCH_COORDINATE_Y,  // 触摸坐标Y
+        TOUCH_COORDINATE_X,  // 触摸坐标X 默认是第一个手指
+        TOUCH_COORDINATE_Y,  // 触摸坐标Y 默认是第一个手指
+
+        TOUCH1_COORDINATE_X, // 触摸1坐标X
+        TOUCH1_COORDINATE_Y, // 触摸1坐标Y
+        TOUCH2_COORDINATE_X, // 触摸2坐标X
+        TOUCH2_COORDINATE_Y, // 触摸2坐标Y
+        TOUCH3_COORDINATE_X, // 触摸3坐标X
+        TOUCH3_COORDINATE_Y, // 触摸3坐标Y
+        TOUCH4_COORDINATE_X, // 触摸4坐标X
+        TOUCH4_COORDINATE_Y, // 触摸4坐标Y
+        TOUCH5_COORDINATE_X, // 触摸5坐标X
+        TOUCH5_COORDINATE_Y, // 触摸5坐标Y
+
+        TOUCH1_PRESSURE_VALUE, // 触摸1手指压力值
+        TOUCH2_PRESSURE_VALUE, // 触摸2手指压力值
+        TOUCH3_PRESSURE_VALUE, // 触摸3手指压力值
+        TOUCH4_PRESSURE_VALUE, // 触摸4手指压力值
+        TOUCH5_PRESSURE_VALUE, // 触摸5手指压力值
+    };
+};
+
+class Arduino_IIC_IMU
+{
+public:
+    enum Device_State
+    {
+    };
+    enum Device
+    {
+        IMU_ACCELERATION_POWER_MODE, // 加速度传感器电源功耗模式
+        IMU_GYROSCOPE_POWER_MODE,    // 陀螺仪传感器电源功耗模式
+
+        IMU_FIFO_POWER_MODE, // 传感器FIFO的电源功耗模式
+        IMU_FIFO_WORK_MODE,  // 传感器FIFO的工作模式
+
+        IMU_FIFO_DATA_TYPE, // 传感器FIFO选择需要获取的数据类型
+    };
+    enum Device_Mode
+    {
+        // 传感器设备功耗模式
+        IMU_DEVICE_OFF,              // 下电模式
+        IMU_DEVICE_ULTRA_LOW_POWER,  // 超低功耗模式
+        IMU_DEVICE_LOW_POWER,        // 低功耗模式
+        IMU_DEVICE_NORMAL_POWER,     // 正常模式
+        IMU_DEVICE_HIGH_POWER,       // 高性能模式
+        IMU_DEVICE_ULTRA_HIGH_POWER, // 超高性能模式
+
+        // 传感器FIFO模式
+        IMU_FIFO_BYPASS,             // Bypass模式 FIFO禁用
+        IMU_FIFO_NORMAL,             // 正常FIFO模式 当FIFO满时停止采集数据
+        IMU_FIFO_CONTINUE,           // Continue模式 如果FIFO已满则新的采样将会覆盖原有值
+        IMU_FIFO_CONTINUE_TO_NORMAL, // 直至触发条件满足前均为Continue模式 条件满足后进入正常FIFO模式
+        IMU_FIFO_BYPASS_TO_CONTINUE, // 直至触发条件满足前均为Bypass模式 条件满足后进入Continue模式
+
+        IMU_FIFO_DATA_ACCELERATION_GYROSCOPE, // 加速度传感器以及陀螺仪传感器的数据
+        IMU_FIFO_DATA_PEDOMETER,              // 计步器的数据
+        IMU_FIFO_DATA_SENSOR_HUB,             // 传感器集合的数据
+
+    };
+    enum Device_Value
+    {
+        IMU_ACCELERATION_SENSITIVITY, // 设置加速度传感器量程范围
+        IMU_GYROSCOPE_SENSITIVITY,    // 设置陀螺仪传感器量程范围
+
+        IMU_ACCELERATION_CORRECTION, // 加速度传感器校正
+        IMU_GYROSCOPE_CORRECTION,    // 陀螺仪传感器校正
+
+        IMU_FIFO_ACCELERATION_FACTOR, // 加速度传感器FIFO的抽取因子
+        IMU_FIFO_GYROSCOPE_FACTOR,    // 加速度传感器FIFO的抽取因子
+    };
+    enum Status_Information
+    {
+    };
+    enum Value_Information
+    {
+        IMU_TEMPERATURE_VALUE, // 传感器温度值
+
+        IMU_ACCELERATION_X, // 加速度传感器X方向值 原始值
+        IMU_ACCELERATION_Y, // 加速度传感器Y方向值 原始值
+        IMU_ACCELERATION_Z, // 加速度传感器Z方向值 原始值
+
+        IMU_GYROSCOPE_X, // 陀螺仪传感器X方向值 原始值
+        IMU_GYROSCOPE_Y, // 陀螺仪传感器Y方向值 原始值
+        IMU_GYROSCOPE_Z, // 陀螺仪传感器Z方向值 原始值
+
+        IMU_ACCELERATION_X_SIGNED, // 加速度传感器X方向值 带符号
+        IMU_ACCELERATION_Y_SIGNED, // 加速度传感器Y方向值 带符号
+        IMU_ACCELERATION_Z_SIGNED, // 加速度传感器Z方向值 带符号
+
+        IMU_GYROSCOPE_X_SIGNED, // 陀螺仪传感器X方向值 带符号
+        IMU_GYROSCOPE_Y_SIGNED, // 陀螺仪传感器Y方向值 带符号
+        IMU_GYROSCOPE_Z_SIGNED, // 陀螺仪传感器Z方向值 带符号
+
+        IMU_FIFO_DATA_PATTERN, // 用于判断下次读取时读取哪个传感器哪个轴上的数据
+        IMU_FIFO_DATA,         // FIFO 上的数据 原始值
     };
 };

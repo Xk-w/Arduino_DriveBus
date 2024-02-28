@@ -25,19 +25,18 @@
  * @Author: Xk_w
  * @Date: 2023-11-17 13:34:38
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-11-27 17:33:55
+ * @LastEditTime: 2024-02-28 14:19:22
  * @License: GPL 3.0
  */
 #include "Arduino_DriveBus_Library.h"
-#include "pin_config.h"
+
+static bool Temp1 = 0;
 
 std::shared_ptr<Arduino_IIC_DriveBus> IIC_Bus =
     std::make_shared<Arduino_HWIIC>(IIC_SDA, IIC_SCL, &Wire);
 
 std::unique_ptr<Arduino_IIC> SY6970(new Arduino_SY6970(IIC_Bus, SY6970_DEVICE_ADDRESS,
                                                        DRIVEBUS_DEFAULT_VALUE, DRIVEBUS_DEFAULT_VALUE));
-
-static bool Temp1 = 0;
 
 void setup()
 {

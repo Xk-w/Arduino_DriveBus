@@ -4,7 +4,7 @@
  * @Author: Xk_w
  * @Date: 2023-12-20 15:46:16
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-12-22 14:03:50
+ * @LastEditTime: 2024-02-28 14:28:43
  * @License: GPL 3.0
  */
 #include "Arduino_HWIIS.h"
@@ -38,7 +38,12 @@ bool Arduino_HWIIS::begin(int8_t device_state, int32_t sample_rate, int32_t bits
             .use_apll = false,
             .tx_desc_auto_clear = false,
             .fixed_mclk = I2S_PIN_NO_CHANGE,
+#if CONFIG_IDF_TARGET_ESP32C6
+            .mclk_multiple = I2S_MCLK_MULTIPLE_512,
+#endif
+#if CONFIG_IDF_TARGET_ESP32S3
             .mclk_multiple = I2S_MCLK_MULTIPLE_DEFAULT,
+#endif
             .bits_per_chan = I2S_BITS_PER_CHAN_16BIT,
 #if SOC_I2S_SUPPORTS_TDM
             .chan_mask = I2S_CHANNEL_MONO,
@@ -71,7 +76,12 @@ bool Arduino_HWIIS::begin(int8_t device_state, int32_t sample_rate, int32_t bits
             .use_apll = false,
             .tx_desc_auto_clear = false,
             .fixed_mclk = I2S_PIN_NO_CHANGE,
+#if CONFIG_IDF_TARGET_ESP32C6
+            .mclk_multiple = I2S_MCLK_MULTIPLE_512,
+#endif
+#if CONFIG_IDF_TARGET_ESP32S3
             .mclk_multiple = I2S_MCLK_MULTIPLE_DEFAULT,
+#endif
             .bits_per_chan = I2S_BITS_PER_CHAN_16BIT,
 #if SOC_I2S_SUPPORTS_TDM
             .chan_mask = I2S_CHANNEL_MONO,

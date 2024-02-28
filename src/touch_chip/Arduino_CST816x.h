@@ -41,7 +41,7 @@
  *      注意事项：
  *      1. 默认启动的中断模式为检测到手势时发出低脉冲
  *
- * @version: V1.0.0
+ * @version: V1.0.1
  * @Author: Xk_w
  * @Date: 2023-11-25 09:14:23
  * @LastEditors: Xk_w
@@ -61,13 +61,13 @@
 #define CST816x_RD_DEVICE_XPOSL 0x04          // XposL
 #define CST816x_RD_DEVICE_YPOSH 0x05          // YposH
 #define CST816x_RD_DEVICE_YPOSL 0x06          // YposL
-#define CST816x_RD_DEVICE_SLEEPMODE 0xE5      // SleepMode
-#define CST816x_RD_DEVICE_INTERRUPT_MODE 0xFA // Interrupt Mode
+#define CST816x_WR_DEVICE_SLEEPMODE 0xE5      // SleepMode
+#define CST816x_WR_DEVICE_INTERRUPT_MODE 0xFA // Interrupt Mode
 #define CST816x_RD_DEVICE_ID 0xA7             // Device ID Register
 
 static const uint8_t CST816x_Initialization_BufferOperations[] = {
     BO_BEGIN_TRANSMISSION,
-    BO_WRITE_C8_D8, CST816x_RD_DEVICE_INTERRUPT_MODE, 0B00010000, // 中断配置为检测到手势时发出低脉冲
+    BO_WRITE_C8_D8, CST816x_WR_DEVICE_INTERRUPT_MODE, 0B00010000, // 中断配置为检测到手势时发出低脉冲
     BO_END_TRANSMISSION,
 
     BO_DELAY, 20};
@@ -84,7 +84,7 @@ public:
     bool IIC_Write_Device_State(uint32_t device, uint8_t state) override;
 
     String IIC_Read_Device_State(uint32_t information) override;
-    int32_t IIC_Read_Device_Value(uint32_t information) override;
+    double IIC_Read_Device_Value(uint32_t information) override;
 
 protected:
     bool IIC_Initialization(void) override;

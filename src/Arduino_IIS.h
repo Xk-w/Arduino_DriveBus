@@ -10,14 +10,11 @@
  * @Author: Xk_w
  * @Date: 2023-11-16 16:58:05
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-12-22 14:21:52
+ * @LastEditTime: 2024-02-28 14:51:20
  * @License: GPL 3.0
  */
 #pragma once
 
-#include <Arduino.h>
-#include <iostream>
-#include <memory>
 #include "Arduino_DriveBus.h"
 
 class Arduino_IIS
@@ -25,8 +22,8 @@ class Arduino_IIS
 public:
     enum Device_Switch
     {
-        Channel_ON,
-        Channel_OFF,
+        CHANNEL_ON,
+        CHANNEL_OFF,
     };
 
     Arduino_IIS(std::shared_ptr<Arduino_IIS_DriveBus> bus, int8_t sd = DRIVEBUS_DEFAULT_VALUE);

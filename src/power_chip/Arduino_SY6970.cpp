@@ -4,7 +4,7 @@
  * @Author: Xk_w
  * @Date: 2023-11-16 15:42:22
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-12-19 17:59:43
+ * @LastEditTime: 2024-02-28 15:00:06
  * @License: GPL 3.0
  */
 #include "Arduino_SY6970.h"
@@ -68,7 +68,6 @@ bool Arduino_SY6970::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
         case Arduino_IIC_Power::Device_State::POWER_DEVICE_OFF:
             if (_bus->IIC_ReadC8D8(_device_address, SY6970_RD_WR_DEVICE_02, &temp_buf) == true)
@@ -80,11 +79,9 @@ bool Arduino_SY6970::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
 
         default:
-            return false;
             break;
         }
 
@@ -102,7 +99,6 @@ bool Arduino_SY6970::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
         case Arduino_IIC_Power::Device_State::POWER_DEVICE_OFF:
             if (_bus->IIC_ReadC8D8(_device_address, SY6970_RD_WR_DEVICE_00, &temp_buf) == true)
@@ -114,11 +110,9 @@ bool Arduino_SY6970::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
 
         default:
-            return false;
             break;
         }
 
@@ -136,7 +130,6 @@ bool Arduino_SY6970::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
         case Arduino_IIC_Power::Device_State::POWER_DEVICE_OFF:
             if (_bus->IIC_ReadC8D8(_device_address, SY6970_RD_WR_DEVICE_03, &temp_buf) == true)
@@ -148,11 +141,9 @@ bool Arduino_SY6970::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
 
         default:
-            return false;
             break;
         }
 
@@ -170,7 +161,6 @@ bool Arduino_SY6970::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
         case Arduino_IIC_Power::Device_State::POWER_DEVICE_OFF:
             if (_bus->IIC_ReadC8D8(_device_address, SY6970_RD_WR_DEVICE_03, &temp_buf) == true)
@@ -182,11 +172,9 @@ bool Arduino_SY6970::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
 
         default:
-            return false;
             break;
         }
 
@@ -204,7 +192,6 @@ bool Arduino_SY6970::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
         case Arduino_IIC_Power::Device_State::POWER_DEVICE_OFF:
             if (_bus->IIC_ReadC8D8(_device_address, SY6970_RD_WR_DEVICE_03, &temp_buf) == true)
@@ -216,18 +203,15 @@ bool Arduino_SY6970::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
 
         default:
-            return false;
             break;
         }
 
         break;
 
     default:
-        return false;
         break;
     }
 
@@ -254,8 +238,6 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                 }
             }
         }
-
-        return false;
         break;
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_MINIMUM_SYSTEM_VOLTAGE_LIMIT: // 3000mV-3700mV(步进值：100mV)
         if (value >= 3000 && value <= 3700)
@@ -271,8 +253,6 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                 }
             }
         }
-
-        return false;
         break;
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_OTG_VOLTAGE_LIMIT: // 4550mV-5510mV(步进值：64mV)
         if (value >= 4550 && value <= 5510)
@@ -288,8 +268,6 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                 }
             }
         }
-
-        return false;
         break;
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_INPUT_CURRENT_LIMIT: // 100mA-3250mA(步进值：50mA)
         if (value >= 100 && value <= 3250)
@@ -305,8 +283,6 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                 }
             }
         }
-
-        return false;
         break;
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_FAST_CHARGING_CURRENT_LIMIT: // 0mA-5056mA(步进值：64mA)
         if (value <= 5056)
@@ -322,8 +298,6 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                 }
             }
         }
-
-        return false;
         break;
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_PRECHARGE_CHARGING_CURRENT_LIMIT: // 64mA-1024mA(步进值：64mA)
         if (value >= 64 && value <= 1024)
@@ -339,8 +313,6 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                 }
             }
         }
-
-        return false;
         break;
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_TERMINATION_CHARGING_CURRENT_LIMIT: // 64mA-1024mA(步进值：64mA)
         if (value >= 64 && value <= 1024)
@@ -356,10 +328,7 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                 }
             }
         }
-
-        return false;
         break;
-
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_WATCHDOG_TIMER: // 0s、40s、80s、160s
         if (value <= 160)
         {
@@ -374,7 +343,6 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                     {
                         return true;
                     }
-                    return false;
                     break;
                 case 40:
                     temp_buf = temp_buf | 0B00010000;
@@ -383,7 +351,6 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                     {
                         return true;
                     }
-                    return false;
                     break;
                 case 80:
                     temp_buf = temp_buf | 0B00100000;
@@ -392,7 +359,6 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                     {
                         return true;
                     }
-                    return false;
                     break;
                 case 160:
                     temp_buf = temp_buf | 0B00110000;
@@ -401,17 +367,13 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                     {
                         return true;
                     }
-                    return false;
                     break;
 
                 default:
-                    return false;
                     break;
                 }
             }
         }
-
-        return false;
         break;
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_THERMAL_REGULATION_THRESHOLD: // 60度-120度(步进值：20度)
         if (value >= 60 && value <= 120)
@@ -427,8 +389,6 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                 }
             }
         }
-
-        return false;
         break;
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_OTG_CHARGING_LIMIT: // 500mA、750mA、1200mA、1400mA、1650mA、1875mA、2150mA、2450mA
         if (value >= 500 && value <= 2450)
@@ -444,7 +404,6 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                     {
                         return true;
                     }
-                    return false;
                     break;
                 case 750:
                     temp_buf = temp_buf | 0B11111001;
@@ -453,7 +412,6 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                     {
                         return true;
                     }
-                    return false;
                     break;
                 case 1200:
                     temp_buf = temp_buf | 0B11111010;
@@ -462,7 +420,6 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                     {
                         return true;
                     }
-                    return false;
                     break;
                 case 1400:
                     temp_buf = temp_buf | 0B11111011;
@@ -471,7 +428,6 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                     {
                         return true;
                     }
-                    return false;
                     break;
                 case 1650:
                     temp_buf = temp_buf | 0B11111100;
@@ -480,7 +436,6 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                     {
                         return true;
                     }
-                    return false;
                     break;
                 case 1875:
                     temp_buf = temp_buf | 0B11111101;
@@ -489,7 +444,6 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                     {
                         return true;
                     }
-                    return false;
                     break;
                 case 2150:
                     temp_buf = temp_buf | 0B11111110;
@@ -498,7 +452,6 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                     {
                         return true;
                     }
-                    return false;
                     break;
                 case 2450:
                     temp_buf = temp_buf | 0B11111111;
@@ -507,17 +460,14 @@ bool Arduino_SY6970::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                     {
                         return true;
                     }
-                    return false;
                     break;
 
                 default:
-                    return false;
                     break;
                 }
             }
         }
 
-        return false;
         break;
 
     default:
@@ -846,7 +796,7 @@ String Arduino_SY6970::IIC_Read_Device_State(uint32_t information)
     return "->Error reading IIC_Read_Information";
 }
 
-int32_t Arduino_SY6970::IIC_Read_Device_Value(uint32_t information)
+double Arduino_SY6970::IIC_Read_Device_Value(uint32_t information)
 {
     uint8_t temp_buf = 0;
 
@@ -859,8 +809,6 @@ int32_t Arduino_SY6970::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(2600 + (temp_buf * 100));
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_BATTERY_VOLTAGE: // 2304mV-4844mV
         if (_bus->IIC_ReadC8D8(_device_address, SY6970_RD_DEVICE_0E, &temp_buf) == true)
@@ -869,8 +817,6 @@ int32_t Arduino_SY6970::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(2304 + (temp_buf * 20));
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_SYSTEM_VOLTAGE: // 2304mV-4844mV
         if (_bus->IIC_ReadC8D8(_device_address, SY6970_RD_DEVICE_0F, &temp_buf) == true)
@@ -879,8 +825,6 @@ int32_t Arduino_SY6970::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(2304 + (temp_buf * 20));
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_NTC_VOLTAGE_PERCENTAGE: // 21000-80055(需要除以1000单位才是%)
         if (_bus->IIC_ReadC8D8(_device_address, SY6970_RD_DEVICE_10, &temp_buf) == true)
@@ -889,8 +833,6 @@ int32_t Arduino_SY6970::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(21000 + (temp_buf * 465));
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_CHARGING_CURRENT: // 0mA-6350mA
         if (_bus->IIC_ReadC8D8(_device_address, SY6970_RD_DEVICE_12, &temp_buf) == true)
@@ -899,8 +841,6 @@ int32_t Arduino_SY6970::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(temp_buf * 50);
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_THERMAL_REGULATION_THRESHOLD: // 60度、80度、100度、120度
         if (_bus->IIC_ReadC8D8(_device_address, SY6970_RD_WR_DEVICE_08, &temp_buf) == true)
@@ -909,8 +849,6 @@ int32_t Arduino_SY6970::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(60 + (temp_buf * 20));
         }
-
-        return -1;
         break;
 
     case Arduino_IIC_Power::Value_Information::POWER_CHARGING_TARGET_VOLTAGE_LIMIT: // 3840mV-4608mV
@@ -920,8 +858,6 @@ int32_t Arduino_SY6970::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(3840 + (temp_buf * 16));
         }
-
-        return -1;
         break;
 
     case Arduino_IIC_Power::Value_Information::POWER_MINIMUM_SYSTEM_VOLTAGE_LIMIT: // 3000mV-3700mV
@@ -931,8 +867,6 @@ int32_t Arduino_SY6970::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(3000 + (temp_buf * 100));
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_OTG_VOLTAGE_LIMIT: // 4550mV-5510mV
         if (_bus->IIC_ReadC8D8(_device_address, SY6970_RD_WR_DEVICE_0A, &temp_buf) == true)
@@ -941,8 +875,6 @@ int32_t Arduino_SY6970::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(4550 + (temp_buf * 64));
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_INPUT_CURRENT_LIMIT: // 100mA-3250mA
         if (_bus->IIC_ReadC8D8(_device_address, SY6970_RD_DEVICE_13, &temp_buf) == true)
@@ -951,8 +883,6 @@ int32_t Arduino_SY6970::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(100 + (temp_buf * 50));
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_FAST_CHARGING_CURRENT_LIMIT: // 0mA-5056mA
         if (_bus->IIC_ReadC8D8(_device_address, SY6970_RD_WR_DEVICE_04, &temp_buf) == true)
@@ -961,8 +891,6 @@ int32_t Arduino_SY6970::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(temp_buf * 64);
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_PRECHARGE_CHARGING_CURRENT_LIMIT: // 64mA-1024mA
         if (_bus->IIC_ReadC8D8(_device_address, SY6970_RD_WR_DEVICE_05, &temp_buf) == true)
@@ -971,8 +899,6 @@ int32_t Arduino_SY6970::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(64 + (temp_buf * 64));
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_TERMINATION_CHARGING_CURRENT_LIMIT: // 64mA-1024mA
         if (_bus->IIC_ReadC8D8(_device_address, SY6970_RD_WR_DEVICE_05, &temp_buf) == true)
@@ -981,8 +907,6 @@ int32_t Arduino_SY6970::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(64 + (temp_buf * 64));
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_OTG_CURRENT_LIMIT: // 64mA-1024mA
         if (_bus->IIC_ReadC8D8(_device_address, SY6970_RD_WR_DEVICE_0A, &temp_buf) == true)
@@ -1017,18 +941,12 @@ int32_t Arduino_SY6970::IIC_Read_Device_Value(uint32_t information)
                 break;
 
             default:
-                return -1;
                 break;
             }
-
-            return -1;
         }
-
-        return -1;
         break;
 
     default:
-        return -1;
         break;
     }
     return -1;

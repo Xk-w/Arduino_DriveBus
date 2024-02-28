@@ -4,7 +4,7 @@
  * @Author: Xk_w
  * @Date: 2023-11-16 15:42:22
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-12-22 14:18:58
+ * @LastEditTime: 2024-02-28 14:59:57
  * @License: GPL 3.0
  */
 #include "Arduino_ETA4662.h"
@@ -68,7 +68,6 @@ bool Arduino_ETA4662::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
         case Arduino_IIC_Power::Device_State::POWER_DEVICE_OFF:
             if (_bus->IIC_ReadC8D8(_device_address, ETA4662_RD_WR_POWER_ON_CONFIGURATION, &temp_buf) == true)
@@ -80,11 +79,9 @@ bool Arduino_ETA4662::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
 
         default:
-            return false;
             break;
         }
         break;
@@ -101,7 +98,6 @@ bool Arduino_ETA4662::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
         case Arduino_IIC_Power::Device_State::POWER_DEVICE_OFF:
             if (_bus->IIC_ReadC8D8(_device_address, ETA4662_RD_WR_CHARGE_TERMINATION_TIMER_CONTROL, &temp_buf) == true)
@@ -113,11 +109,8 @@ bool Arduino_ETA4662::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
-
         default:
-            return false;
             break;
         }
         break;
@@ -134,7 +127,6 @@ bool Arduino_ETA4662::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
         case Arduino_IIC_Power::Device_State::POWER_DEVICE_OFF:
             if (_bus->IIC_ReadC8D8(_device_address, ETA4662_RD_WR_MISCELLANEOUS_OPERATION_CONTROL, &temp_buf) == true)
@@ -146,11 +138,9 @@ bool Arduino_ETA4662::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
 
         default:
-            return false;
             break;
         }
         break;
@@ -167,7 +157,6 @@ bool Arduino_ETA4662::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
         case Arduino_IIC_Power::Device_State::POWER_DEVICE_OFF:
             if (_bus->IIC_ReadC8D8(_device_address, ETA4662_RD_WR_SYSTEM_VOLTAGE_REGULATION, &temp_buf) == true)
@@ -179,17 +168,14 @@ bool Arduino_ETA4662::IIC_Write_Device_State(uint32_t device, uint8_t state)
                     return true;
                 }
             }
-            return false;
             break;
 
         default:
-            return false;
             break;
         }
         break;
 
     default:
-        return false;
         break;
     }
     return false;
@@ -215,8 +201,6 @@ bool Arduino_ETA4662::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                 }
             }
         }
-
-        return false;
         break;
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_CHARGING_TARGET_VOLTAGE_LIMIT: // 3600mV-4545mV(步进值：15mV)
         if (value >= 3600 && value <= 4545)
@@ -232,8 +216,6 @@ bool Arduino_ETA4662::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                 }
             }
         }
-
-        return false;
         break;
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_SYSTEM_VOLTAGE_LIMIT: // 4200mV-4950mV(步进值：50mV)
         if (value >= 4200 && value <= 4950)
@@ -249,8 +231,6 @@ bool Arduino_ETA4662::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                 }
             }
         }
-
-        return false;
         break;
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_INPUT_CURRENT_LIMIT: // 50mA-500mA(步进值：30mA)
         if (value >= 50 && value <= 500)
@@ -266,8 +246,6 @@ bool Arduino_ETA4662::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                 }
             }
         }
-
-        return false;
         break;
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_BATTERY_UVLO_THRESHOLD: // 2400mV-3030mV(步进值：90mV)
         if (value >= 2400 && value <= 3030)
@@ -283,8 +261,6 @@ bool Arduino_ETA4662::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                 }
             }
         }
-
-        return false;
         break;
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_FAST_CHARGING_CURRENT_LIMIT: // 8mA-456mA(步进值：8mA)
         if (value >= 8 && value <= 456)
@@ -300,8 +276,6 @@ bool Arduino_ETA4662::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                 }
             }
         }
-
-        return false;
         break;
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_TERMINATION_PRECHARGE_CHARGING_CURRENT_LIMIT: // 1mA-31mA(步进值：2mA)
         if (value >= 1 && value <= 31)
@@ -317,8 +291,6 @@ bool Arduino_ETA4662::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                 }
             }
         }
-
-        return false;
         break;
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_BAT_TO_SYS_DISCHARGE_CURRENT_LIMIT: // 400mA-3200mA(步进值：200mA)
         if (value >= 400 && value <= 3200)
@@ -334,8 +306,6 @@ bool Arduino_ETA4662::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                 }
             }
         }
-
-        return false;
         break;
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_THERMAL_REGULATION_THRESHOLD: // 60度-120度(步进值：20度)
         if (value >= 60 && value <= 120)
@@ -351,8 +321,6 @@ bool Arduino_ETA4662::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                 }
             }
         }
-
-        return false;
         break;
     case Arduino_IIC_Power::Device_Value::POWER_DEVICE_WATCHDOG_TIMER: // 0s、40s、80s、160s
         if (value <= 160)
@@ -369,44 +337,34 @@ bool Arduino_ETA4662::IIC_Write_Device_Value(uint32_t device, uint32_t value)
                     {
                         return true;
                     }
-                    return false;
                     break;
                 case 40:
                     temp_buf = temp_buf | 0B00100000;
-
                     if (_bus->IIC_WriteC8D8(_device_address, ETA4662_RD_WR_CHARGE_TERMINATION_TIMER_CONTROL, temp_buf) == true)
                     {
                         return true;
                     }
-                    return false;
                     break;
                 case 80:
                     temp_buf = temp_buf | 0B01000000;
-
                     if (_bus->IIC_WriteC8D8(_device_address, ETA4662_RD_WR_CHARGE_TERMINATION_TIMER_CONTROL, temp_buf) == true)
                     {
                         return true;
                     }
-                    return false;
                     break;
                 case 160:
                     temp_buf = temp_buf | 0B01100000;
-
                     if (_bus->IIC_WriteC8D8(_device_address, ETA4662_RD_WR_CHARGE_TERMINATION_TIMER_CONTROL, temp_buf) == true)
                     {
                         return true;
                     }
-                    return false;
                     break;
 
                 default:
-                    return false;
                     break;
                 }
             }
         }
-
-        return false;
         break;
 
     default:
@@ -660,7 +618,7 @@ String Arduino_ETA4662::IIC_Read_Device_State(uint32_t information)
     return "->Error reading IIC_Read_Information";
 }
 
-int32_t Arduino_ETA4662::IIC_Read_Device_Value(uint32_t information)
+double Arduino_ETA4662::IIC_Read_Device_Value(uint32_t information)
 {
     uint8_t temp_buf = 0;
 
@@ -673,8 +631,6 @@ int32_t Arduino_ETA4662::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(60 + (temp_buf * 20));
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_MINIMUM_INPUT_VOLTAGE_LIMIT: // 3880mV-5080mV
         if (_bus->IIC_ReadC8D8(_device_address, ETA4662_RD_WR_INPUT_SOURCE_CONTROL, &temp_buf) == true)
@@ -683,8 +639,6 @@ int32_t Arduino_ETA4662::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(3880 + (temp_buf * 80));
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_CHARGING_TARGET_VOLTAGE_LIMIT: // 3600mV-4545mV
         if (_bus->IIC_ReadC8D8(_device_address, ETA4662_RD_WR_CHARGE_VOLTAGE_CONTROL, &temp_buf) == true)
@@ -693,8 +647,6 @@ int32_t Arduino_ETA4662::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(3600 + (temp_buf * 15));
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_SYSTEM_VOLTAGE_LIMIT: // 4200mV-4950mV
         if (_bus->IIC_ReadC8D8(_device_address, ETA4662_RD_WR_SYSTEM_VOLTAGE_REGULATION, &temp_buf) == true)
@@ -703,8 +655,6 @@ int32_t Arduino_ETA4662::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(4200 + (temp_buf * 50));
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_INPUT_CURRENT_LIMIT: // 50mA-500mA
         if (_bus->IIC_ReadC8D8(_device_address, ETA4662_RD_WR_INPUT_SOURCE_CONTROL, &temp_buf) == true)
@@ -713,8 +663,6 @@ int32_t Arduino_ETA4662::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(50 + (temp_buf * 30));
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_FAST_CHARGING_CURRENT_LIMIT: // 8mA-456mA
         if (_bus->IIC_ReadC8D8(_device_address, ETA4662_RD_WR_CHARGE_CURRENT_CONTROL, &temp_buf) == true)
@@ -723,8 +671,6 @@ int32_t Arduino_ETA4662::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(8 + (temp_buf * 8));
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_TERMINATION_PRECHARGE_CHARGING_CURRENT_LIMIT: // 1mA-31mA
         if (_bus->IIC_ReadC8D8(_device_address, ETA4662_RD_WR_DISCHARGE_TERMINATION_CURRENT, &temp_buf) == true)
@@ -733,8 +679,6 @@ int32_t Arduino_ETA4662::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(1 + (temp_buf * 2));
         }
-
-        return -1;
         break;
     case Arduino_IIC_Power::Value_Information::POWER_BAT_TO_SYS_DISCHARGE_CURRENT_LIMIT: // 400mA-3200mA
         if (_bus->IIC_ReadC8D8(_device_address, ETA4662_RD_WR_DISCHARGE_TERMINATION_CURRENT, &temp_buf) == true)
@@ -743,12 +687,9 @@ int32_t Arduino_ETA4662::IIC_Read_Device_Value(uint32_t information)
 
             return int32_t(400 + (temp_buf * 200));
         }
-
-        return -1;
         break;
 
     default:
-        return -1;
         break;
     }
     return -1;

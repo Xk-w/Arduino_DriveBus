@@ -6,18 +6,20 @@
  *      Arduino_DriveBus is used for managing all drive buses. It is related to the bottom-level
  *  drivers in the hardware folder.
  *
- * @version: V1.0.0
+ * @version: V1.1.5
  * @Author: Xk_w
  * @Date: 2023-11-16 15:53:46
  * @LastEditors: Xk_w
- * @LastEditTime: 2024-01-08 11:08:46
+ * @LastEditTime: 2024-02-28 14:50:20
  * @License: GPL 3.0
  */
 #pragma once
 
 #include <Arduino.h>
 #include <iostream>
+#include <memory>
 #include <vector>
+#include <numeric>
 
 #define DRIVEBUS_DEFAULT_VALUE -1
 
@@ -52,6 +54,7 @@ public:
     bool IIC_Write_Data(uint8_t device_address, const uint8_t *data, size_t length);
     bool IIC_WriteC8D8(uint8_t device_address, uint8_t c, uint8_t d);
     bool IIC_ReadC8_Data(uint8_t device_address, uint8_t c, uint8_t *d, size_t length);
+    bool IIC_ReadC8_Delay_Data(uint8_t device_address, uint8_t c, uint32_t delay_ms, uint8_t *d, size_t length);
     bool IIC_ReadC8D8(uint8_t device_address, uint8_t c, uint8_t *d);
 
 protected:

@@ -1,10 +1,10 @@
 /*
  * @Description: Arduino_DriveBus.cpp
- * @version: V1.0.0
+ * @version: V1.1.2
  * @Author: Xk_w
  * @Date: 2023-11-16 15:53:46
  * @LastEditors: Xk_w
- * @LastEditTime: 2024-01-08 13:47:41
+ * @LastEditTime: 2024-02-28 14:43:56
  * @License: GPL 3.0
  */
 #include "Arduino_DriveBus.h"
@@ -143,6 +143,30 @@ bool Arduino_IIC_DriveBus::IIC_ReadC8_Data(uint8_t device_address, uint8_t c, ui
         log_e("->EndTransmission() fail");
         return false;
     }
+    if (RequestFrom(device_address, length) == false)
+    {
+        log_e("->RequestFrom(device_address, length) fail");
+        return false;
+    }
+    *d = Read();
+
+    return true;
+}
+
+bool Arduino_IIC_DriveBus::IIC_ReadC8_Delay_Data(uint8_t device_address, uint8_t c, uint32_t delay_ms, uint8_t *d, size_t length)
+{
+    BeginTransmission(device_address);
+    if (Write(c) == false)
+    {
+        log_e("->Write(c) fail");
+        return false;
+    }
+    if (EndTransmission() == false)
+    {
+        log_e("->EndTransmission() fail");
+        return false;
+    }
+    delay(delay_ms);
     if (RequestFrom(device_address, length) == false)
     {
         log_e("->RequestFrom(device_address, length) fail");

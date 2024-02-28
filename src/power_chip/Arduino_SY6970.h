@@ -125,7 +125,7 @@ public:
     bool IIC_Write_Device_State(uint32_t device, uint8_t state) override;
     bool IIC_Write_Device_Value(uint32_t device, uint32_t value) override;
     String IIC_Read_Device_State(uint32_t information) override;
-    int32_t IIC_Read_Device_Value(uint32_t information) override;
+    double IIC_Read_Device_Value(uint32_t information) override;
 
 protected:
     bool IIC_Initialization(void) override;

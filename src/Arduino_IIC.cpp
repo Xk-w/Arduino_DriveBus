@@ -1,13 +1,12 @@
 /*
  * @Description: Arduino_IIC.cpp
- * @version: V1.0.0
+ * @version: V1.1.5
  * @Author: Xk_w
  * @Date: 2023-11-16 16:58:05
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-11-25 15:57:33
+ * @LastEditTime: 2024-02-28 14:50:40
  * @License: GPL 3.0
  */
-#include <iostream>
 #include "Arduino_IIC.h"
 
 Arduino_IIC::Arduino_IIC(std::shared_ptr<Arduino_IIC_DriveBus> bus, uint8_t device_address,
@@ -66,7 +65,7 @@ String Arduino_IIC::IIC_Read_Device_State(uint32_t information)
     log_e("No 'IIC_Read_Information' fictional function has been created.");
     return "No 'IIC_Read_Information' fictional function has been created.";
 }
-int32_t Arduino_IIC::IIC_Read_Device_Value(uint32_t information)
+double Arduino_IIC::IIC_Read_Device_Value(uint32_t information)
 {
     log_e("No 'IIC_Read_Information' fictional function has been created.");
     return -1;

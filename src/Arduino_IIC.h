@@ -6,22 +6,19 @@
  *      Arduino_IIC is used for managing IIC related buses. It is related to the bottom-level
  *  drivers in the folder xxx_chip.
  *
- * @version: V1.0.0
+ * @version: V1.1.5
  * @Author: Xk_w
  * @Date: 2023-11-16 16:58:05
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-12-19 18:01:43
+ * @LastEditTime: 2024-02-28 14:46:12
  * @License: GPL 3.0
  */
 #pragma once
 
-#include <Arduino.h>
-#include <iostream>
-#include <memory>
 #include "Arduino_DriveBus.h"
 #include "Arduino_IIC_Chip.h"
 
-class Arduino_IIC : public Arduino_IIC_Power, public Arduino_IIC_Touch
+class Arduino_IIC : public Arduino_IIC_Power, public Arduino_IIC_Touch, public Arduino_IIC_IMU
 {
 public:
     Arduino_IIC(std::shared_ptr<Arduino_IIC_DriveBus> bus, uint8_t device_address,
@@ -38,7 +35,7 @@ public:
     // 读取状态信息虚函数
     virtual String IIC_Read_Device_State(uint32_t information);
     // 读取值信息虚函数
-    virtual int32_t IIC_Read_Device_Value(uint32_t information);
+    virtual double IIC_Read_Device_Value(uint32_t information);
 
     // Flag
     int8_t IIC_Interrupt_Flag = DRIVEBUS_DEFAULT_VALUE;

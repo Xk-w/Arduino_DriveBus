@@ -23,11 +23,10 @@
  * @Author: Xk_w
  * @Date: 2023-08-25 17:09:20
  * @LastEditors: Xk_w
- * @LastEditTime: 2023-11-28 10:34:14
+ * @LastEditTime: 2024-02-28 14:24:48
  * @License: GPL 3.0
  */
 #include "Arduino_DriveBus_Library.h"
-#include "pin_config.h"
 
 std::shared_ptr<Arduino_IIC_DriveBus> IIC_Bus =
     std::make_shared<Arduino_HWIIC>(IIC_SDA, IIC_SCL, &Wire);
